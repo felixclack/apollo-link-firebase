@@ -2,7 +2,7 @@ import { OperationTypeNode } from 'graphql';
 import { graphql } from 'graphql-anywhere/lib/async';
 import { ApolloLink, Observable, FetchResult, Operation, NextLink } from 'apollo-link';
 import { hasDirectives, addTypenameToDocument, getMainDefinition } from 'apollo-utilities';
-import { database as firebaseDatabase } from 'firebase';
+import { database as firebaseDatabase } from '../firebase';
 import { Resolver } from 'graphql-anywhere';
 import { ResolverContext } from './types';
 
@@ -22,8 +22,8 @@ const getResolver = (operationType: string): Resolver => {
 };
 
 export default class RtdbLink extends ApolloLink {
-  private database: firebaseDatabase.Database;
-  constructor({database}: {database: firebaseDatabase.Database}) {
+  private database;
+  constructor({database}: {database}) {
     super();
     this.database = database;
   }

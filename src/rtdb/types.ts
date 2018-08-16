@@ -1,7 +1,7 @@
-import { database } from 'firebase';
+import { database } from '../firebase';
 
 export interface ResolverContext {
-  database: database.Database;
+  database;
   exportVal: any;
   findType: (directives: {[key: string]: DirectiveArgs}) => string;
 }
@@ -12,8 +12,8 @@ export interface MutationResolverContext extends ResolverContext {
 
 export interface ResolverRoot {
   __typename?: string;
-  __snapshot?: database.DataSnapshot;
-  rootSnapshot?: database.DataSnapshot;
+  __snapshot?;
+  rootSnapshot?;
 }
 
 export interface MutationResolverRoot {

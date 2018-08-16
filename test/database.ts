@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import firebase from 'react-native-firebase';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAwzjZJD7SUCRC42mL7A9sw4VPIvodQH98',
@@ -7,7 +7,7 @@ firebase.initializeApp({
   projectId: 'apollo-test-2c6af',
   storageBucket: '',
   messagingSenderId: '84103499922'
-});
+}, 'apolloTest');
 
 export const initialize = () => new Promise((resolve, reject) => {
   firebase.auth().onAuthStateChanged(user => {

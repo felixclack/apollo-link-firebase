@@ -1,11 +1,11 @@
 import { ExecInfo } from 'graphql-anywhere/lib/async';
 import { Resolver } from 'graphql-anywhere';
-import { database as firebaseDatabase } from 'firebase';
+import { database as firebaseDatabase } from '../firebase';
 import * as has from 'lodash/has';
 import { ResolverRoot, ResolverContext } from './types';
 import { createQuery } from './utils';
 
-const snapshotToArray = (snapshot: firebaseDatabase.DataSnapshot, typename?: string): ResolverRoot[] => {
+const snapshotToArray = (snapshot, typename?: string): ResolverRoot[] => {
   const ret = [];
   snapshot.forEach(childSnapshot => {
     ret.push({

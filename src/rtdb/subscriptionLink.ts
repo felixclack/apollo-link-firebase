@@ -3,15 +3,15 @@ import { ApolloLink, Observable, FetchResult, Operation, NextLink } from 'apollo
 import {
   hasDirectives, addTypenameToDocument, getMainDefinition, getFragmentDefinitions, getDirectiveInfoFromField
 } from 'apollo-utilities';
-import { database as firebaseDatabase } from 'firebase';
+import { database as firebaseDatabase } from '../firebase';
 import { graphql } from 'graphql-anywhere/lib/async';
 import { SubDirectiveArgs, ResolverContext, ResolverRoot } from './types';
 import { createQuery } from './utils';
 import queryResolver from './queryResolver';
 
 export default class RtdbSubLink extends ApolloLink {
-  private database: firebaseDatabase.Database;
-  constructor({database}: {database: firebaseDatabase.Database}) {
+  private database;
+  constructor({database}: {database}) {
     super();
     this.database = database;
   }
@@ -50,7 +50,7 @@ export default class RtdbSubLink extends ApolloLink {
         directives: rtdbDirectives
       });
       const {event} = rtdbDirectives;
-      const callback = (snapshot: firebaseDatabase.DataSnapshot) => {
+      const callback = snapshot => {
         const root: ResolverRoot = {rootSnapshot: snapshot};
         graphql(
           queryResolver,

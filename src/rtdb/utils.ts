@@ -1,4 +1,4 @@
-import { database as firebaseDatabase } from 'firebase';
+import { database as firebaseDatabase } from '../firebase';
 import * as mapValues from 'lodash/mapValues';
 import * as trimStart from 'lodash/trimStart';
 import * as isFunction from 'lodash/isFunction';
@@ -8,11 +8,11 @@ import { DirectiveArgs } from './types';
 export const createQuery = ({
   database, directives, exportVal, snapshot
 }: {
-  database: firebaseDatabase.Database,
+  database,
   directives: DirectiveArgs,
   exportVal?: any,
-  snapshot?: firebaseDatabase.DataSnapshot
-}): firebaseDatabase.Query => {
+  snapshot?
+}) => {
   directives = mapValues(directives, val => {
     // customizer
     if (isFunction(val)) {
@@ -26,7 +26,7 @@ export const createQuery = ({
     return val;
   });
 
-  let query: firebaseDatabase.Query | firebaseDatabase.Reference = database.ref(directives.ref);
+  let query = database.ref(directives.ref);
 
   // orderBy
   if (directives.orderByChild) {
